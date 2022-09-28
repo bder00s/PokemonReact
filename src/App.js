@@ -1,47 +1,45 @@
 import React, {useEffect} from "react";
 import './App.css';
-import axios from 'axios'
+
+import Pokecard from "./Components/Pokecard";
+import axios from "axios";
+
 
 function App() {
     const [pokemon, setPokemon] = React.useState('');
+
 
     useEffect(() => {
 
         async function getData() {
             try {
-                const result = await axios.get('https://pokeapi.co/api/v2/pokemon/jigglypuff');
-                console.log(result.data);
-                setPokemon(result.data);
+                const result = await axios.get(`https://pokeapi.co/api/v2/pokemon/`);
+                console.log(result.data.results);
+                setPokemon(result.data.results);
 
             } catch (error) {
                 console.error(error);
+
             }
         }
-
-        getData()
-
+        getData();
     }, []);
 
     return (
-        <div>
-            {pokemon &&
-                <article>
-                    <h1>{pokemon.name}</h1>
-                    <img src={pokemon.sprites.front_default} alt="pokemon"/>
-                    <p>Moves: {pokemon.moves.length}</p>
-                    <p>Weight: {pokemon.weight} </p>
-                    <p>Abilities:</p>
-                    <button type="button" id="ability-1">{pokemon.abilities[0].ability.name}</button>
-                    <button type="button" id="ability-2">{pokemon.abilities[1].ability.name}</button>
-                    {pokemon.abilities.length > 2 &&
-                        <button type="button" id="ability-3">{pokemon.abilities[2].ability.name}</button>}
+        <>
+            {pokemon && pokemon.map((poke) => {
 
-                </article>
-            }
-
-        </div>
+            return <Pokecard
+            url={poke.url}
+            name={poke.name}
+            key={poke.name}
+            />
+            })}
 
 
+
+
+</>
     )
 
 
