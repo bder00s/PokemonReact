@@ -18,28 +18,31 @@ function Pokecard({name, url}) {
             }
         }
 getData();
-        }, []);
+        }, [url]);
     return(
         <>
+            <div className="container">
             {pokemon &&
-                <article>
+                <article className="poke-card">
                     <h1>{pokemon.name}</h1>
                     <img src={pokemon.sprites.front_default} alt="pokemon"/>
+                    <h3>Type:</h3>
+                    {pokemon.types.map((type) =>{
+                        return <p>-{type.type.name}</p>
+                    })}
                     <p>Moves: {pokemon.moves.length}</p>
                     <p>Weight: {pokemon.weight} </p>
-                    <p>Abilities:</p>
+                    <h3>Abilities:</h3>
                      {pokemon.abilities.map((ability) => {
                         return <button>{ability.ability.name}</button>
                     })}
 
-                    {/*<button type="button" id="ability-1">{pokemon.abilities[0].ability.name}</button>*/}
-                    {/*<button type="button" id="ability-2">{pokemon.abilities[1].ability.name}</button>*/}
-                    {/*/!*{pokemon.abilities.length > 2 &&*!/*/}
-                    {/*/!*    <button type="button" id="ability-3">{pokemon.abilities[2].ability.name}</button>}*!/*/}
 
                 </article>
             }
+            </div>
         </>
+
     );
 };
 
