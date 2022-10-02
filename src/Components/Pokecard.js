@@ -20,7 +20,7 @@ function Pokecard({name, url}) {
 getData();
         }, [url]);
     return(
-        <>
+
             <div className="container">
             {pokemon &&
                 <article className="poke-card">
@@ -41,7 +41,7 @@ getData();
                 </article>
             }
             </div>
-        </>
+
 
     );
 };

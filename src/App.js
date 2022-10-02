@@ -9,7 +9,7 @@ import axios from "axios";
 
 
 function App() {
-    const [pokemon, setPokemon] = React.useState('');
+    const [pokemon, setPokemon] = React.useState(undefined);
     const [endpoint, setEndpoint] = React.useState('https://pokeapi.co/api/v2/pokemon/');
 
 
@@ -48,7 +48,7 @@ function App() {
 
 
 
-            {pokemon.results && pokemon.results.map((poke) => {
+            {pokemon && pokemon.results.map((poke) => {
 
             return <Pokecard
             url={poke.url}
@@ -57,7 +57,20 @@ function App() {
             />
             })}
 
+            <button
+                type="button"
+                onClick={() => setEndpoint(pokemon.previous)}
+            >
+                Previous
+            </button>
 
+
+            <button
+                type="button"
+                onClick={() => setEndpoint(pokemon.next)}
+            >
+                Next
+            </button>
 
 
 </>
